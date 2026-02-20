@@ -1,42 +1,15 @@
-<?php
-/**
- * Fonctionnalité MODIFIER UN LIVRE - Version simplifiée JSON
- */
-
-$fichier_json = 'livres.json';
-
-// Charger les livres
-$livres = json_decode(file_get_contents($fichier_json), true);
-
-// Demander l'ID
-echo "ID du livre à modifier: ";
-$id = (int)trim(fgets(STDIN));
-
-// Trouver et modifier le livre
-$trouve = false;
-foreach ($livres as &$livre) {
-    if ($livre['id'] === $id) {
-        echo "Nouveau titre: ";
-        $livre['titre'] = trim(fgets(STDIN));
-        
-        echo "Nouvel auteur: ";
-        $livre['auteur'] = trim(fgets(STDIN));
-        
-        echo "Nouvelle année: ";
-        $livre['annee'] = (int)trim(fgets(STDIN));
-        
-        echo "Nouveau prix: ";
-        $livre['prix'] = (float)trim(fgets(STDIN));
-        
-        $trouve = true;
-        break;
-    }
-}
-
-if ($trouve) {
-    file_put_contents($fichier_json, json_encode($livres, JSON_PRETTY_PRINT));
-    echo "Livre modifié avec succès!\n";
-} else {
-    echo "Livre non trouvé.\n";
-}
-
+<!-- Formulaire ajout / modification -->
+<section>
+    <?php if ($editBook): ?>
+        <h2>Modifier le livre</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="modifier">
+            <input type="hidden" name="id" value="<?= $editBook['id'] ?>">
+            <input type="text" name="titre" value="<?= htmlspecialchars($editBook['titre']) ?>" placeholder="Titre" required>
+            <input type="text" name="auteur" value="<?= htmlspecialchars($editBook['auteur']) ?>" placeholder="Auteur">
+            <input type="number" name="annee" value="<?= htmlspecialchars($editBook['annee']) ?>" placeholder="Année" style="width:80px">
+            <button type="submit" class="btn-green">Enregistrer</button>
+            <a href="index.php" class="btn btn-gray">Annuler</a>
+        </form>
+    <?php endif; ?>
+</section>
