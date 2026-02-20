@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 		>>>>>>>>README<<<<<<<<	
 
 Ce projet est une librairie collaborative développée en PHP.
@@ -43,3 +44,6 @@ Ce projet est une librairie collaborative développée en PHP.
 	Utilisation de Git: Le développement a été effectué sur la branche modificateur de fonctionalitées, une fois la fonctionnalité 	développée, la branche a été fusionnée vers la branche master. Pour chaque modification un commit a été effectuer.
 
 	
+=======
+Cet branche contient la fonction de suppression en php du tp librairie.
+>>>>>>> ab3ca6e2392815298f67757c1a2693547d2cd04d
