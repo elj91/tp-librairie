@@ -178,5 +178,44 @@ if ($editId) {
     <?php endif; ?>
 </section>
 
+<!-- Liste des livres -->
+<section>
+    <h2>Liste des livres (<?= count($books) ?>)</h2>
+    <?php if (empty($books)): ?>
+        <p>Aucun livre pour le moment.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Année</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($books as $book): ?>
+                <tr>
+                    <td><?= $book['id'] ?></td>
+                    <td><?= htmlspecialchars($book['titre']) ?></td>
+                    <td><?= htmlspecialchars($book['auteur'] ?: '—') ?></td>
+                    <td><?= htmlspecialchars($book['annee'] ?: '—') ?></td>
+                    <td>
+                        <a href="index.php?edit=<?= $book['id'] ?>" class="btn btn-blue">Modifier</a>
+
+                        <form class="inline" method="POST" onsubmit="return confirm('Supprimer ?')">
+                            <input type="hidden" name="action" value="supprimer">
+                            <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                            <button type="submit" class="btn-red">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</section>
+
 </body>
 </html>
